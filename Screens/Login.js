@@ -13,12 +13,13 @@ export default function Login({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const {SetUserID} =useUserID();
+  const {SetUserID,SetuserPhoneNo} =useUserID();
 
 
   useEffect(()=>{
     setUsername("");
     setPassword("");
+    SetUserID("");
   },[])
 
   const handleLogin = async () => {
@@ -29,13 +30,14 @@ export default function Login({ navigation }) {
           password,
         });
         const userIDget = response.data.userID;
+        const userPhoneNo=response.data.userphone;
         console.log("response login "+userIDget);
         SetUserID(userIDget);
+        SetuserPhoneNo(userPhoneNo);
         const token = response.data.token;
         saveAuthToken(token);
-        // Store the token securely (e.g., using AsyncStorage)
-  
-        // Navigate to a protected screen
+
+        
         showMessage({
           message: "Login Successfull",
           type: "success",
