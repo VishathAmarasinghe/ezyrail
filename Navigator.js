@@ -19,11 +19,17 @@ const stackNavigator=createNativeStackNavigator();
 export default function Navigatorone() {
     return (
       <stackNavigator.Navigator initialRouteName='home'>
-        <stackNavigator.Screen name='home' options={{title:""}} component={MainScreen}/>
-        <stackNavigator.Screen name='logregisterScreen' component={LogRegisterScreen}/>
-        <stackNavigator.Screen name='registerScreen' component={Register}/>
+        <stackNavigator.Screen name='home' options={{title:"",headerShown:false}} component={MainScreen} />
+        <stackNavigator.Screen name='logregisterScreen' options={{title:"",headerStyle: {
+            backgroundColor: 'white',
+            shadowOpacity: 0,
+            borderWidth: 0,
+            shadowColor: 'transparent',
+            elevation: 0,
+          }}} component={LogRegisterScreen}/>
+        <stackNavigator.Screen name='registerScreen' options={{title:""}} component={Register}/>
         <stackNavigator.Screen name='OTPscreen' component={OTPScreen}/>
-        <stackNavigator.Screen name='login' component={Login}/>
+        <stackNavigator.Screen name='login' options={{title:""}} component={Login}/>
         <stackNavigator.Screen name='DrawerNav' component={DrawerNav}  options={{headerShown:false}}/>
         <stackNavigator.Screen name='TicketTypeSelection' component={TicketTypeSelection}  options={{headerShown:false}}/>
       </stackNavigator.Navigator>

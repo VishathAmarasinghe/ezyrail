@@ -138,19 +138,30 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+    fontFamily:"Poppins-Medium",
+    fontWeight:"600",
+    textAlign:"center",
+    marginTop:20,
+    fontWeight:"800"
   },
   button: {
-    backgroundColor: "#007bff",
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
+    width: "80%",
+    height:51,
+    borderWidth:2,
+    backgroundColor:"#53A4BD",
+    borderColor: "#53A4BD",
+    borderRadius: 10,
+    fontSize: 15,
+    marginTop: 15,
+    marginBottom: 15,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"},
+
   buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize:23,
+    fontFamily:"Poppins-Medium",
+    color:"white",
+    fontWeight:"800"
   },
 });

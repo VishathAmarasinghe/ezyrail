@@ -41,7 +41,7 @@ export default function Notificatons(){
     
     return(
         <View style={styles.mainContainer}>
-            <Text style={styles.heading}>Your Tickets</Text>
+            <Text style={styles.heading}>My Tickets</Text>
             <View style={styles.ticketContainer}>
             {
                 viewsettings?<FlatList data={ticets} renderItem={({item})=><TicketCard  date={item.BookedDate} ticketCount={item.TicketCount} amount={item.Amount} />} />:<></>
@@ -56,33 +56,37 @@ const styles=StyleSheet.create({
     mainContainer:{
         flex:1,
         alignItems:"center",
-        borderWidth:2,
-        width:"100%"
+        // borderWidth:2,
+        width:"100%",
+        backgroundColor:"white"
     },
     heading:{
-        fontSize:25,
-        marginTop:15
+        fontSize: 28,
+    fontFamily:"Poppins-Medium",
+    fontWeight:"800",
+    marginBottom:10,
+    marginTop:10
     },
     ticketContainer:{
         flex:1,
-        borderWidth:2,
+        // borderWidth:2,
         width:"85%",
         
     },
     card:{
         width:"100%",
         height:100,
-        borderWidth:2,
+        // borderWidth:2,
         display:"flex",
         flexDirection:"row"
     },
     cardimg:{
         width:"30%",
-        borderWidth:2
+        // borderWidth:2
     },
     cardDetails:{
         width:"70%",
-        borderWidth:2
+        // borderWidth:2
     },QrImageOriginal:{
         width:"100%",
         height:"100%"

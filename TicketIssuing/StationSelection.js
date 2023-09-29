@@ -94,13 +94,15 @@ const data = [
       backgroundColor: 'white',
       padding: 16,
       borderWidth:2,
+      borderColor:"#53A4BD",
+      borderRadius:13,
       marginTop:20,
       
     },
     dropdown: {
       height: 50,
-      borderColor: 'gray',
-      borderWidth: 0.5,
+      // borderColor: 'gray',
+      // borderWidth: 0.5,
       borderRadius: 8,
       paddingHorizontal: 8,
     },

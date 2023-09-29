@@ -19,13 +19,13 @@ export default function DrawerNav(){
           <DrawerContentScrollView contentContainerStyle={{flex: 1}}>
             <View
               style={{
-                backgroundColor: '#4f4f4f',
-                height: 100,
+                backgroundColor: '#53A4BD',
+                height: 50,
                 justifyContent: 'center',
                 alignItems: 'center',
                 top: -5,
               }}>
-              <Text style={{color: '#fff'}}>Home BBS</Text>
+              <Text style={{color: '#fff',fontSize:20,fontFamily:"Poppins-Medium",fontWeight:"800"}}>Ezy Rail</Text>
             </View>
             <DrawerItemList {...props} />
           </DrawerContentScrollView>
@@ -41,7 +41,7 @@ export default function DrawerNav(){
           }}
           drawerContent={DrawerHeaderContent}>
           <Drawer.Screen
-            name={'DashBoard'}
+            name={'Ezy Rail'}
             
             component={ButtomNav}
             options={{

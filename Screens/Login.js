@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext,useLayoutEffect } from "react";
 import { Text, View, StyleSheet, Image, Button, TextInput } from "react-native";
 import axios from 'axios';
 import { saveAuthToken } from "../Tokens/TokenService";
@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useUserID } from "../context/UserIDContext";
+import { TouchableOpacity } from "react-native";
 
 
 
@@ -14,6 +15,13 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("");
 
   const {SetUserID,SetuserPhoneNo} =useUserID();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // headerTitle: () => <Image source={require("../assets/mainlogo.png")} />,
+      headerShadowVisible: false,
+    })
+  }, [navigation])
 
 
   useEffect(()=>{
@@ -61,7 +69,7 @@ export default function Login({ navigation }) {
     
   };
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{flex:1,backgroundColor:"white"}}>
     <View style={styles.mainregisterContainer}>
       <View style={styles.heading}>
         <Text style={styles.headingText}>Let's Get You In</Text>
@@ -83,12 +91,14 @@ export default function Login({ navigation }) {
           onChangeText={(text) => setPassword(text)}
           placeholder="Last Name"
         ></TextInput>
-        <View style={styles.registerbtn}>
-          <Button
+        
+          <TouchableOpacity
+          style={styles.registerbtn}
             onPress={handleLogin}
-            title="Login"
-          />
-        </View>
+          >
+            <Text style={styles.registerbtntext}>Login</Text>
+          </TouchableOpacity>
+       
       </View>
     </View>
           
@@ -99,28 +109,33 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   mainregisterContainer: {
     flex: 1,
-    flexDirection: "column",
-    // backgroundColor:"#53A4BD"
+    alignItems:"center",
+    justifyContent:"space-around",
+    backgroundColor:"white",
+    // borderWidth:2
   },
   heading: {
-    borderWidth: 2,
+    // borderWidth: 2,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 55,
   },
   headingText: {
-    fontSize: 22,
+    fontSize: 28,
+    fontFamily:"Poppins-Medium",
+    fontWeight:"800"
   },
   inputContainer: {
     // flex:1,
     // justifyContent:"space-between",
-    borderWidth: 2,
+    // borderWidth: 2,
     alignItems: "center",
+    width:"100%",
     marginTop: 80,
   },
   inputholder: {
-    borderWidth: 2,
+    borderWidth: 3,
     height: 55,
     width: "80%",
     borderColor: "#53A4BD",
@@ -132,15 +147,27 @@ const styles = StyleSheet.create({
   },
   registerbtn: {
     width: "80%",
+    height:51,
+    borderWidth:2,
+    backgroundColor:"#53A4BD",
     borderColor: "#53A4BD",
     borderRadius: 10,
     fontSize: 15,
     marginTop: 15,
     marginBottom: 15,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
   },
   loginimg: {
     flexDirection: "column",
     alignItems: "center",
-    marginTop: 50,
+    marginTop: 80,
   },
+  registerbtntext:{
+    fontSize:23,
+    fontFamily:"Poppins-Medium",
+    color:"white",
+    fontWeight:"800"
+  }
 });

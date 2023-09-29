@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Image, Button, TextInput } from "react-native";
+import { Text, View, StyleSheet, Image, Button, TextInput, Touchable, TouchableOpacity } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import TicketClasses from "./TicketClasses";
 import { useRoute } from "@react-navigation/native"
@@ -58,10 +58,10 @@ const formattedDate = `${year}-${month}-${day}`;
 
   return (
     <View style={styles.maicontainer}>
-      <Text>Tickets</Text>
+      <Text style={styles.maicontainertext}>Ticket Count</Text>
       <View style={styles.mainsprinnerContainer}>
         <View style={styles.sprinnerContainer}>
-          <Text style={styles.sprinertext}>Adult</Text>
+          {/* <Text style={styles.sprinertext}>Adult</Text> */}
           <InputSpinner
             max={5}
             fontSize={25}
@@ -102,15 +102,17 @@ const formattedDate = `${year}-${month}-${day}`;
         <TicketClasses/>
       </View> */}
       <View>
-        <Text style={styles.radioContainerTwo}>Journey Type</Text>
+        <Text style={styles.maicontainertext}>Journey Type</Text>
         <JourneyType setjournetType={setjournetType}/>
       </View>
       <View>
-      <Text>`Total Value is Rs: {totalcharge}`</Text>
+      <Text style={styles.maicontainertextnew}>`Total Value is Rs: {totalcharge}`</Text>
       </View>
-      <View>
-        <Button onPress={proceedPayment} title="Proceed To Payment"></Button>
-      </View>
+      
+        <TouchableOpacity style={styles.proceedBtn} onPress={proceedPayment} title="Proceed To Payment">
+          <Text style={styles.proceedBtnetxt}>Proceed To Payment</Text>
+        </TouchableOpacity>
+      
 
     </View>
   );
@@ -119,18 +121,26 @@ const formattedDate = `${year}-${month}-${day}`;
 const styles = StyleSheet.create({
   maicontainer: {
     flex: 1,
-    borderWidth: 2,
+    // borderWidth: 2,
+    alignItems:"center",
+    justifyContent:"space-around",
+    backgroundColor:"white"
   },
   sprinnerContainer:{
-    borderWidth:2,
-    flexDirection:"row",
+    // borderWidth:2,
+    flexDirection:"column",
     width:"50%",
+    alignItems:"center",
+    justifyContent:"center",
+    borderBottomColor:"#53A4BD"
     // alignItems:"stretch",
 
   },
   mainsprinnerContainer:{
-    borderWidth:2,
-    flexDirection:"row"
+    // borderWidth:2,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"center"
   },
   sprinertext:{
     fontSize:20
@@ -143,5 +153,41 @@ const styles = StyleSheet.create({
   },
   radioContainerTwo:{
     
+  },maicontainertext:{
+    fontSize: 24,
+    fontFamily:"Poppins-Medium",
+    fontWeight:"600",
+    textAlign:"center",
+    marginTop:20
+  },
+  maicontainertextnew:{
+    fontSize: 24,
+    fontFamily:"Poppins-Medium",
+    fontWeight:"600",
+    textAlign:"center",
+    marginTop:20,
+    padding:10,
+    width:"80%",
+    backgroundColor:"#D9D9D9",
+    borderRadius:15
+  },
+  proceedBtn:{
+    width: "80%",
+    height:51,
+    borderWidth:2,
+    backgroundColor:"#53A4BD",
+    borderColor: "#53A4BD",
+    borderRadius: 10,
+    fontSize: 15,
+    marginTop: 15,
+    marginBottom: 15,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
+  },proceedBtnetxt:{
+    fontSize:23,
+    fontFamily:"Poppins-Medium",
+    color:"white",
+    fontWeight:"800"
   }
 });

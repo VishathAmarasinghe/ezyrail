@@ -1,8 +1,9 @@
-import { Text, View, StyleSheet, Image, Button, TextInput } from "react-native";
+import { Text, View, StyleSheet, Image, Button, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Calendar } from "react-native-calendars";
 import DropdownComponent from "./StationSelection";
 import { useEffect } from "react";
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 // import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 export default function CalenderScreen({navigation}) {
@@ -52,6 +53,13 @@ export default function CalenderScreen({navigation}) {
 
       <View style={styles.mainCalenderContainer}>
         <Calendar
+        style={{
+          borderWidth: 3,
+          borderColor: '#53A4BD',
+          borderRadius:10,
+          height: 350,
+          
+        }}
           onDayPress={(day) => {
             setSelected(day.dateString);
           }}
@@ -64,33 +72,50 @@ export default function CalenderScreen({navigation}) {
           }}
         />
       </View>
-      <View style={styles.nextbuton}>
-        <Button onPress={checkValidationOfDate} title="Continue"></Button>
-      </View>
+      
+        <TouchableOpacity style={styles.nextbuton} onPress={checkValidationOfDate} title="Continue"><Text style={styles.nextbutonText}>Continue</Text></TouchableOpacity>
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   mainCalenderContainer: {
-    borderWidth: 2,
-    borderColor: "red",
+    // borderWidth: 2,
+    // borderColor: "red",
     width: "95%",
     alignItems:"stretch",
-    flexDirection:"column"
+    flexDirection:"column",
+    marginTop:15
   },
   nextbuton:{
-    marginTop:10,
-    width:"80%",
-    borderWidth:2
+    width: "80%",
+    height:45,
+    borderWidth:2,
+    backgroundColor:"#53A4BD",
+    borderColor: "#53A4BD",
+    borderRadius: 10,
+    fontSize: 15,
+    marginTop: 5,
+    marginBottom: 15,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
   },
   everythingHolder:{
     flexDirection:"column",
     alignItems:"center",
     width:"100%",
-    borderWidth:2
+    borderWidth:2,
+    backgroundColor:"white"
   },
   dropdownContainer:{
     width:"95%"
+  },
+  nextbutonText:{
+    fontSize:23,
+    fontFamily:"Poppins-Medium",
+    color:"white",
+    fontWeight:"800"
   }
 });

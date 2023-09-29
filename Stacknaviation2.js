@@ -10,13 +10,21 @@ const stacktwo=createNativeStackNavigator();
 
 export default function StacknavigtorTwo(){
     return(
-        <stacktwo.Navigator initialRouteName="homescreenlgoin" >
-            <stacktwo.Screen component={HomeScreen} name="homescreenlgoin" />
-            <stacktwo.Screen component={TicketTypeSelection} name="TicketTypeSelection" />
-            <stacktwo.Screen component={CalenderScreen} name="calenderScreen"/>
-            <stacktwo.Screen component={TicketCountGenerator} name="ticketCountScreen"/>
-            <stacktwo.Screen component={PaymentSelector} name="paymentselectScreen"/>
-            <stacktwo.Screen component={QRScreen} name="QRScreen"/>
+        <stacktwo.Navigator   screenOptions={{headerTitleStyle: { textAlign: 'center' }}} initialRouteName="homescreenlgoin" >
+            <stacktwo.Screen   component={HomeScreen} options={{title:"DashBoard",
+        headerStyle: {
+            backgroundColor: 'white',
+            
+          },
+          headerTitleStyle: { textAlign: 'center' },
+          
+          
+          }} name="homescreenlgoin" />
+            <stacktwo.Screen component={TicketTypeSelection} options={{title:"Ticket Selection"}} name="TicketTypeSelection" />
+            <stacktwo.Screen component={CalenderScreen} options={{title:"Select Date & Journey"}} name="calenderScreen"/>
+            <stacktwo.Screen component={TicketCountGenerator} options={{title:"Ticket Count & Journey Type"}} name="ticketCountScreen"/>
+            <stacktwo.Screen component={PaymentSelector} options={{title:""}} name="paymentselectScreen"/>
+            <stacktwo.Screen component={QRScreen} options={{title:"QR",headerShown:false}}  name="QRScreen"/>
         </stacktwo.Navigator>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState,useRef,useLayoutEffect } from "react";
 import axios from 'axios';
 import PhoneInput from "react-native-phone-number-input";
 import { showMessage, hideMessage } from "react-native-flash-message";
@@ -16,6 +16,16 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import RequestOTP from "../OTP/RequestOTP";
 
 export default function Register({ navigation }) {
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // headerTitle: () => <Image source={require("../assets/mainlogo.png")} />,
+      headerShadowVisible: false,
+    })
+  }, [navigation])
+
+
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setfirstName] = useState("");
@@ -81,7 +91,7 @@ export default function Register({ navigation }) {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={{flex:1,backgroundColor:"white"}}>
       <View style={styles.mainregisterContainer}>
         <View style={styles.heading}>
           <Text style={styles.headingText}>Create Your Account</Text>
@@ -136,12 +146,14 @@ export default function Register({ navigation }) {
             style={styles.inputholder}
             placeholder="Password"
           ></TextInput>
-          <View style={styles.registerbtn}>
-            <Button onPress={handleRegister} title="Register" />
-          </View>
+          
+            <TouchableOpacity style={styles.registerbtn} onPress={handleRegister} title="Register" >
+              <Text style={styles.registerbtntext}>Register</Text>
+            </TouchableOpacity>
+         
         </View>
       </View>
-    </KeyboardAwareScrollView>
+    </KeyboardAwareScrollView >
   );
 }
 
@@ -149,24 +161,29 @@ const styles = StyleSheet.create({
   mainregisterContainer: {
     flex: 1,
     flexDirection: "column",
-    // backgroundColor:"#53A4BD"
+    backgroundColor:"white",
+    alignItems:"center",
+    justifyContent:"space-around"
   },
   heading: {
-    borderWidth: 2,
+    // borderWidth: 2,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 55,
+    // marginTop: 55,
   },
   headingText: {
-    fontSize: 22,
+    fontSize: 28,
+    fontFamily:"Poppins-Medium",
+    fontWeight:"800"
   },
   inputContainer: {
     flex: 1,
     // justifyContent:"space-between",
-    borderWidth: 2,
+    // borderWidth: 2,
     alignItems: "center",
-    marginTop: 10,
+    width:"100%",
+    marginTop: 50,
   },
   inputholderphone:{
     borderWidth: 2,
@@ -194,10 +211,22 @@ const styles = StyleSheet.create({
   },
   registerbtn: {
     width: "80%",
+    height:51,
+    borderWidth:2,
+    backgroundColor:"#53A4BD",
     borderColor: "#53A4BD",
     borderRadius: 10,
     fontSize: 15,
-    marginTop: 15,
+    marginTop: 25,
     marginBottom: 15,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
   },
+  registerbtntext:{
+    fontSize:23,
+    fontFamily:"Poppins-Medium",
+    color:"white",
+    fontWeight:"800"
+  }
 });

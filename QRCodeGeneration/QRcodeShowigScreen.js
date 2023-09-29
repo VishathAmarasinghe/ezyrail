@@ -1,12 +1,13 @@
 import React, { useState,useEffect} from "react";
-import { Text, View,StyleSheet,Image,Button,TextInput } from 'react-native';
+import { Text, View,StyleSheet,Image,Button,TextInput, TouchableOpacity } from 'react-native';
 import { useRoute } from "@react-navigation/native"
 import GenerateQR from './GenerateQR';
 import { useUserID } from "../context/UserIDContext";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import axios from 'axios';
 import SMSSender from "./SMSSender";
-import QrStoringMethod from './QRCodeAdding';
+import StoreQR from './QRCodeAdding';
+
 
 
 export default  function QRScreen({navigation}){
@@ -20,6 +21,7 @@ export default  function QRScreen({navigation}){
   const totalcharge = route.params.totalcharge;
   const changeMemberCount = route.params.changeMemberCount;
   const journeyType = route.params.journeyType;
+
 
   const [visibility,setvisibility]=useState(true);
 
@@ -36,9 +38,26 @@ export default  function QRScreen({navigation}){
     const QRKey="https://quickchart.io/qr?text=\"UserID:"+userID+",BookedDate:"+date+",From:"+fromValue+",toValue:"+toValue+",ticketCount:"+changeMemberCount+",amount:"+totalcharge+",UniqueID:"+uniqueIDGenerator+"\"&size=200";
 
 
+
+    useEffect(()=>{
+        const timer = setTimeout(() => {
+            const dataToSend = {
+                "QRURL": QRKey,
+                "QRUniqueID": uniqueIDGenerator,
+                "QRUserID": userID,
+                "BookedDate":date,
+                "Amount":totalcharge,
+                "TicketCount":changeMemberCount
+            };
+      
+            StoreQR(dataToSend);
+          }, 2000);
+
+          return () => clearTimeout(timer);
+    },[]);
     //SMSSender(userphoneNumber,QRKey);
     
-    QrStoringMethod(QRKey,uniqueIDGenerator,userID,date,totalcharge,changeMemberCount);
+    // QrStoringMethod(QRKey,uniqueIDGenerator,userID,date,totalcharge,changeMemberCount);
 
 
 
@@ -57,18 +76,20 @@ export default  function QRScreen({navigation}){
       <View style={styles.detailContainer}>
         <Text style={styles.textsettings}>{date}</Text>
         <View style={styles.locationsContainer}>
-            <Text style={styles.textsettings}>{fromValue}</Text>
-            <Text style={styles.textsettings}>{toValue}</Text>
+            <Text style={styles.textsettings}>Loc No {fromValue} To</Text>
+            <Text style={styles.textsettings}>Loc No {toValue}</Text>
         </View>
-        <Text style={styles.textsettings}>Train NO</Text>
+        <Text style={styles.textsettings}>Train NO: 23254</Text>
         <Text style={styles.textsettings}>Amount Rs:{totalcharge}</Text>
         <Text style={styles.textsettings}>{changeMemberCount} Tickets</Text>
       </View>
       
       </View>
-      <View style={styles.buttonContainer} >
-      <Button title='Download'></Button>
-      </View>
+     
+      <TouchableOpacity style={styles.buttonContainer}  >
+        <Text style={styles.buttonContainertext}>Download</Text>
+      </TouchableOpacity>
+    
         </View>
     )
 }
@@ -76,24 +97,29 @@ export default  function QRScreen({navigation}){
 const styles=StyleSheet.create({
     allDetailsContainer:{
         flex:1,
-        borderWidth:2,
+        // borderWidth:2,
         alignItems:"center",
-        // justifyContent:"space-around"
+        justifyContent:"space-around",
+        backgroundColor:"white"
     },
     maintitle:{
-        fontSize:30,
-        textAlign:"center"
+        fontSize: 28,
+        fontFamily:"Poppins-Medium",
+        fontWeight:"800",
+        marginBottom:15,
+        marginTop:10
     },
     QrImage:{
         width:"65%",
         borderWidth:3,
-        borderColor:"red",
+        // borderColor:"red",
         height:"45%",
-        marginBottom:10
+        marginBottom:10,
+        borderRadius:15
     },
     detailContainer:{
         flex:1,
-        borderWidth:2,
+        // borderWidth:2,
         width:"80%"
     },textsettings:{
         fontSize:25,
@@ -106,23 +132,40 @@ const styles=StyleSheet.create({
         justifyContent:"space-around"
     },
     buttonContainer:{
-        width:"60%",
-        borderWidth:2,
-        marginTop:20,
-        marginBottom:20
-    },QrImageOriginal:{
+        width: "80%",
+    height:51,
+    // borderWidth:2,
+    backgroundColor:"#53A4BD",
+    // borderColor: "#53A4BD",
+    borderRadius: 10,
+    fontSize: 15,
+    marginTop: 15,
+    marginBottom: 15,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
+
+    },
+    QrImageOriginal:{
         width:"100%",
-        height:"100%"
+        height:"100%",
+        borderRadius:10
     },biggerContainer:{
         width:"85%",
         flex:1,
-        borderWidth:2,
+        // borderWidth:2,
         borderColor:"green",
         alignItems:"center",
         backgroundColor:"#53A4BD",
         borderRadius:20,
         marginTop:10,
-        paddingTop:15
+        paddingTop:20
+    },
+    buttonContainertext:{
+        fontSize:23,
+    fontFamily:"Poppins-Medium",
+    color:"white",
+    fontWeight:"800"
     }
 
 
